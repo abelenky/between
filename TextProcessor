@@ -1,0 +1,55 @@
+#pragma once
+
+#include <regex>
+#include <string>
+#include <vector>
+
+
+using std::regex;
+using std::string;
+using std::vector;
+
+namespace Binky
+{
+	template<class T>
+	class TextProcessor
+	{
+	public:
+		typedef void(T::*Method)(vector<string>&);
+		struct Rule
+		{
+		//	Rule(const regex& rx, Method m) : expression(rx), method(m) {}
+
+			regex expression;
+			Method method;
+		};
+
+	public:
+		void DispatchText(const string text)
+		{
+			for (auto r : Rules)
+			{
+				std::smatch result;
+				if (std::regex_match(text, result, regex(r.expression)))
+				{
+					(static_cast<T*>(this)->*(r.method))(vector<string>(++result.begin(), result.end()));
+					break;  // Found a rule that matched.  Stop looking for more (in particular, do NOT fall into the catchall of (.*)
+				}
+			}
+		}
+
+		void DispatchArgV(int argc, char* argv[])
+		{
+			std::vector<string> args;
+			args.assign(argv[0], argv[argc - 1]);
+
+			for (int i = 1; i < argc; ++i)
+			{
+				options.DispatchText(string(argv[i]));
+			}
+		}
+
+		__declspec(property(get = GetRules)) vector<Rule>& Rules;
+		virtual const vector<Rule>& GetRules() const = 0;
+	};
+}
