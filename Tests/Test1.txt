@@ -1,0 +1,12 @@
+::Libraries
+texteditor.tlb
+DocPhraseAutoComplete.tlb
+CPSContext.tlb
+ScdUtilDll.lib
+DocCommon.lib
+srvrtl.lib
+cpmrtl.lib
+crmrtl.lib
+msgrtl.lib
+pvformsdata.lib
+::Libraries

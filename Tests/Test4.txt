@@ -1,0 +1,16 @@
+::Multiple
+texteditor.tlb
+DocPhraseAutoComplete.tlb
+CPSContext.tlb
+ScdUtilDll.lib
+::Multiple
+::Multiple
+DocCommon.lib
+srvrtl.lib
+cpmrtl.lib
+crmrtl.lib
+::Multiple
+::Multiple
+msgrtl.lib
+pvformsdata.lib
+::Multiple
